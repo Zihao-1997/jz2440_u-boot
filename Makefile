@@ -259,9 +259,12 @@ export	HOSTARCH HOSTOS
 #########################################################################
 
 # set default to nothing for native builds
-ifeq ($(HOSTARCH),$(ARCH))
-CROSS_COMPILE ?=
+ifeq ($(HOSTARCH),arm)
+CROSS_COMPILE ?= arm-linux-gnueabi-
 endif
+
+ARM = arm
+CROSS_COMPILE = arm-linux-gnueabi-
 
 KCONFIG_CONFIG	?= .config
 export KCONFIG_CONFIG

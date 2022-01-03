@@ -323,6 +323,7 @@ void ns16550_serial_initialize(void);
 void pl01x_serial_initialize(void);
 void pxa_serial_initialize(void);
 void sh_serial_initialize(void);
+void s3c24xx_serial_initialize(void);
 
 /**
  * serial_printf() - Write a formatted string to the serial console

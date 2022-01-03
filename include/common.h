@@ -143,6 +143,13 @@ int	get_clocks (void);
 ulong	get_bus_freq  (ulong);
 int get_serial_clock(void);
 
+#if defined(CONFIG_S3C24X0)
+ulong get_FCLK(void);
+ulong get_HCLK(void);
+ulong get_PCLK(void);
+ulong get_UCLK(void);
+#endif
+
 /* lib/uuid.c */
 #include <uuid.h>
 

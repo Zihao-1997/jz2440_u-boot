@@ -1,0 +1,6 @@
+JZ2440 BOARD
+M:	Andrew Wang <zihao_1997@outlook.com>
+S:	Maintained
+F:	board/samsung/jz2440/
+F:	include/configs/jz2440.h
+F:	configs/jz2440_defconfig

@@ -179,6 +179,7 @@ void serial_initialize(void)
 	pxa_serial_initialize();
 	sh_serial_initialize();
 	mtk_serial_initialize();
+	s3c24xx_serial_initialize();
 
 	serial_assign(default_serial_console()->name);
 }
