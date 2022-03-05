@@ -89,7 +89,18 @@ clbss_l:cmp	r0, r1			/* while not at end of BSS */
  */
 
 ENTRY(_main)
+	bl nand_init
 
+	mov r0, #0 
+	ldr r1, =(CONFIG_SYS_TEXT_BASE)
+	ldr r2, =_start
+	ldr r3, =__bss_start 
+	sub r2, r3, r2 
+	bl 	nand_relocate
+
+	ldr pc, =call_board_init_f
+
+call_board_init_f:
 /*
  * Set up initial C runtime environment and call board_init_f(0).
  */
@@ -136,8 +147,10 @@ ENTRY(_main)
 #if defined(CONFIG_CPU_V7M)
 	orr	lr, #1				/* As required by Thumb-only */
 #endif
+#if 0
 	ldr	r0, [r9, #GD_RELOCADDR]		/* r0 = gd->relocaddr */
 	b	relocate_code
+#endif 
 here:
 /*
  * now relocate vectors

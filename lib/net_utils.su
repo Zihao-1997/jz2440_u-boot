@@ -1,0 +1,2 @@
+net_utils.c:14:16:string_to_ip	24	static
+net_utils.c:45:6:string_to_enetaddr	24	static

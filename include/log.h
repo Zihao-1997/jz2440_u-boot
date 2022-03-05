@@ -148,6 +148,8 @@ static inline int _log_nop(enum log_category_t cat, enum log_level_t level,
 		      __func__, pr_fmt(_fmt), ##_args); \
 })
 
+#define DEBUG
+
 #ifdef DEBUG
 #define _DEBUG	1
 #else

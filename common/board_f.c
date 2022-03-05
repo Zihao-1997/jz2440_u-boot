@@ -454,8 +454,12 @@ static int reserve_uboot(void)
 		 * reserve memory for U-Boot code, data & bss
 		 * round down to next 4 kB limit
 		 */
+	#if 0
 		gd->relocaddr -= gd->mon_len;
 		gd->relocaddr &= ~(4096 - 1);
+	#else
+		gd->relocaddr = CONFIG_SYS_TEXT_BASE; 
+	#endif 	
 	#if defined(CONFIG_E500) || defined(CONFIG_MIPS)
 		/* round down to next 64 kB limit so that IVPR stays aligned */
 		gd->relocaddr &= ~(65536 - 1);
@@ -1011,6 +1015,12 @@ static const init_fnc_t init_sequence_f[] = {
 
 void board_init_f(ulong boot_flags)
 {
+	volatile unsigned long *gpfcon = (volatile unsigned long *)0x56000050;
+	volatile unsigned long *gpfdat = (volatile unsigned long *)0x56000054; 
+
+	*gpfcon = 0x00000500; 
+	*gpfdat = 0x0;
+
 	gd->flags = boot_flags;
 	gd->have_console = 0;
 

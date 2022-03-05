@@ -1,0 +1,4 @@
+bootp.c:351:13:bootp_handler	48	static
+bootp.c:702:6:bootp_reset	8	static
+bootp.c:710:6:bootp_request	72	static
+bootp.c:390:13:bootp_timeout_handler	8	static

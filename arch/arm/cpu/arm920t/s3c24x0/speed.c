@@ -37,7 +37,7 @@ static ulong get_PLLCLK(int pllreg)
 	struct s3c24x0_clock_power *clk_power = s3c24x0_get_base_clock_power();
 	ulong r, m, p, s;
 
-	if (pllreg == MPLL)
+	if (pllreg == MPLL) 
 		r = readl(&clk_power->mpllcon);
 	else if (pllreg == UPLL)
 		r = readl(&clk_power->upllcon);

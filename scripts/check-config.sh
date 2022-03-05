@@ -42,7 +42,7 @@ export LC_COLLATE=C
 cat ${path} |sed -n 's/^#define \(CONFIG_[A-Za-z0-9_]*\).*/\1/p' |sort |uniq \
 	>${configs}
 
-comm -23 ${configs} ${whitelist} > ${suspects}
+comm -23 --nocheck-order ${configs} ${whitelist} > ${suspects}
 
 cat `find ${srctree} -name "Kconfig*"` |sed -n \
 	-e 's/^\s*config *\([A-Za-z0-9_]*\).*$/CONFIG_\1/p' \

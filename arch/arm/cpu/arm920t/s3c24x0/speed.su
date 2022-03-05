@@ -1,0 +1,4 @@
+speed.c:60:7:get_FCLK	8	static
+speed.c:66:7:get_HCLK	8	static
+speed.c:89:7:get_PCLK	8	static
+speed.c:97:7:get_UCLK	8	static

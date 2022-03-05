@@ -1,0 +1,4 @@
+net.c:178:12:netboot_common	64	static
+net.c:18:12:do_bootp	0	static
+net.c:105:12:do_nfs	0	static
+net.c:31:5:do_tftpb	16	static

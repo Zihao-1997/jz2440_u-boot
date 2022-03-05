@@ -179,6 +179,15 @@ config DEBUG_UART
 	  serial drivers are up and running (done in serial_init()). Otherwise
 	  the drivers may conflict and you will get strange output.
 
+config SERIAL1 
+	bool "Enable s3c24x0 UART0"
+
+config SERIAL2 
+	bool "Enable s3c24x0 UART1"
+
+config SERIAL3 
+	bool "Enable s3c24x0 UART2"
+
 choice
 	prompt "Select which UART will provide the debug UART"
 	depends on DEBUG_UART
@@ -754,6 +763,11 @@ config MTK_SERIAL
 	  tree binding to operate.
 	  The High-speed UART is compatible with the ns16550a UART and have
 	  its own high-speed registers.
+
+config S3C24X0_SERIAL 
+	bool "S3C24X0 UART support"
+	depends on TARGET_JZ2440
+	select SERIAL1
 
 config MPC8XX_CONS
 	bool "Console driver for MPC8XX"

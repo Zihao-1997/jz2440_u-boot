@@ -49,6 +49,44 @@ copyex:
 	bne	copyex
 #endif
 
+#if defined(CONFIG_S3C2440)
+#define WTCON 		0x53000000
+#define INTMSK 		0x4A000000
+#define INTSUBMSK 	0x4A00001C
+#define CLKDIVN 	0x4C000014 
+#define LOCKTIME 	0x4C000000 
+#define MPLLCON 	0x4C000004
+
+	ldr r0, =WTCON 
+	mov r1, #0x0 
+	str r1, [r0] 
+
+	mov r1, #0xFFFFFFFF 
+	ldr r0, =INTMSK 
+	str r1, [r0]  
+
+	ldr r1, =0xFFFFFFFF 
+	ldr r0, =LOCKTIME 
+	str r1, [r0] 
+
+	ldr r0, =CLKDIVN 
+	mov r1, #0x5 	// FCLK:HCLK:PCLK = 1:4:8
+	str r1, [r0]
+
+	mrc p15, 0, r0, c1, c0, 0
+	orr r0, r0, #0xC0000000
+	mcr p15, 0, r0, c1, c0, 0
+
+	ldr r1, =(0x5C << 12 | 0x01 << 4 | 0x01)  	// FCLK = 4000MHz
+	ldr r0, =MPLLCON 
+	str r1, [r0] 
+
+	mrc p15, 0, r0, c1, c0, 0 
+	orr r0, r0, #(1<<12) 
+	mcr p15, 0, r0, c1, c0, 0
+
+#endif /* CONFIG_S3C2440 */
+
 	/*
 	 * we do sys-critical inits only at reboot,
 	 * not when booting from ram!

@@ -724,6 +724,7 @@ c_flags := $(KBUILD_CFLAGS) $(cpp_flags)
 
 HAVE_VENDOR_COMMON_LIB = $(if $(wildcard $(srctree)/board/$(VENDOR)/common/Makefile),y,n)
 
+libs-y += $(if $(BOARDDIR),board/$(BOARDDIR)/)
 libs-y += lib/
 libs-$(HAVE_VENDOR_COMMON_LIB) += board/$(VENDOR)/common/
 libs-$(CONFIG_OF_EMBED) += dts/
@@ -771,9 +772,9 @@ libs-$(CONFIG_UT_ENV) += test/env/
 libs-$(CONFIG_UT_OPTEE) += test/optee/
 libs-$(CONFIG_UT_OVERLAY) += test/overlay/
 
-libs-y += $(if $(BOARDDIR),board/$(BOARDDIR)/)
+#libs-y += $(if $(BOARDDIR),board/$(BOARDDIR)/)
 
-libs-y := $(sort $(libs-y))
+#libs-y := $(sort $(libs-y))
 
 u-boot-dirs	:= $(patsubst %/,%,$(filter %/, $(libs-y))) tools examples
 

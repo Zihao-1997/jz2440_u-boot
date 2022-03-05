@@ -42,7 +42,8 @@ SECTIONS
 	{
 		*(.__image_copy_start)
 		*(.vectors)
-		CPUDIR/start.o (.text*)
+		CPUDIR/start.o (.text)
+		board/samsung/jz2440/built-in.o (.text*) 
 	}
 
 	/* This needs to come before *(.text*) */
