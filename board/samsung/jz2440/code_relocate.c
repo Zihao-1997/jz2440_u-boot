@@ -11,7 +11,7 @@
 
 #define PAGE_SIZE   2048
 
-void nand_init(void)
+void nand_init_rel(void)
 {
     NFCONF = (TACLS << 12) | (TWRPH0 << 8) | (TWRPH1 << 4);
     /**

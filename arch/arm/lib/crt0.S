@@ -89,7 +89,7 @@ clbss_l:cmp	r0, r1			/* while not at end of BSS */
  */
 
 ENTRY(_main)
-	bl nand_init
+	bl nand_init_rel
 
 	mov r0, #0 
 	ldr r1, =(CONFIG_SYS_TEXT_BASE)

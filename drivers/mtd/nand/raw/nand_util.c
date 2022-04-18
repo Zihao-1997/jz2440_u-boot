@@ -522,6 +522,7 @@ int nand_verify(struct mtd_info *mtd, loff_t ofs, size_t len, u_char *buf)
 	size_t verlen = mtd->writesize;
 	uint8_t *verbuf = memalign(ARCH_DMA_MINALIGN, verlen);
 
+	debug("nand_verify\n");
 	if (!verbuf)
 		return -ENOMEM;
 
@@ -530,6 +531,7 @@ int nand_verify(struct mtd_info *mtd, loff_t ofs, size_t len, u_char *buf)
 	     verofs += verlen, buf += verlen) {
 		verlen = min(mtd->writesize, (uint32_t)(ofs + len - verofs));
 		rval = nand_read(mtd, verofs, &verlen, verbuf);
+		debug("nand_verify rval = %d\n", rval);
 		if (!rval || (rval == -EUCLEAN))
 			rval = memcmp(buf, verbuf, verlen);
 
@@ -616,20 +618,25 @@ int nand_write_skip_bad(struct mtd_info *mtd, loff_t offset, size_t *length,
 		return -EFBIG;
 	}
 
+	debug("~~~\n");
 	if (!need_skip && !(flags & WITH_DROP_FFS)) {
 		rval = nand_write(mtd, offset, length, buffer);
 
-		if ((flags & WITH_WR_VERIFY) && !rval)
+		if ((flags & WITH_WR_VERIFY) && !rval) {
+			debug("000\n");
 			rval = nand_verify(mtd, offset, *length, buffer);
+		}
 
 		if (rval == 0)
 			return 0;
 
 		*length = 0;
+		debug("111\n");
 		printf("NAND write to offset %llx failed %d\n",
 			offset, rval);
 		return rval;
 	}
+	debug("###\n");
 
 	while (left_to_write > 0) {
 		size_t block_offset = offset & (mtd->erasesize - 1);
@@ -667,6 +674,7 @@ int nand_write_skip_bad(struct mtd_info *mtd, loff_t offset, size_t *length,
 		p_buffer += write_size;
 
 		if (rval != 0) {
+			debug("222\n");
 			printf("NAND write to offset %llx failed %d\n",
 				offset, rval);
 			*length -= left_to_write;

@@ -44,4 +44,4 @@ board_f.c:308:14:board_get_usable_ram_top	0	static
 board_f.c:325:12:setup_dest_addr	16	static
 board_f.c:577:12:arch_reserve_stacks	0	static
 board_f.c:582:12:reserve_stacks	0	static
-board_f.c:1016:6:board_init_f	24	static
+board_f.c:1016:6:board_init_f	16	static

@@ -64,6 +64,12 @@ deps_common/image.o := \
   include/configs/jz2440.h \
     $(wildcard include/config/sys/clk/freq.h) \
     $(wildcard include/config/sys/init/sp/addr.h) \
+    $(wildcard include/config/cmd/nand.h) \
+    $(wildcard include/config/mtd/raw/nand.h) \
+    $(wildcard include/config/sys/nand/base.h) \
+    $(wildcard include/config/sys/max/nand/device.h) \
+    $(wildcard include/config/sys/nand/eccsize.h) \
+    $(wildcard include/config/sys/nand/eccbytes.h) \
   arch/arm/include/asm/config.h \
     $(wildcard include/config/h/.h) \
     $(wildcard include/config/arch/ls1021a.h) \

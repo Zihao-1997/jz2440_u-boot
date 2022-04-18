@@ -95,12 +95,6 @@ static int serial_init_dev(const int dev_index)
 {
 	struct s3c24x0_uart *uart = s3c24x0_get_base_uart(dev_index);
 
-	volatile unsigned long *gpfcon = (volatile unsigned long *)0x56000050;
-	volatile unsigned long *gpfdat = (volatile unsigned long *)0x56000054; 
-
-	*gpfcon = 0x00001500; 
-	*gpfdat = 0x0;
-
 #ifdef CONFIG_HWFLOW
 	hwflow = 0;	/* turned off by default */
 #endif

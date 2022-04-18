@@ -67,6 +67,7 @@ obj-$(CONFIG_NAND_PLAT) += nand_plat.o
 obj-$(CONFIG_NAND_SUNXI) += sunxi_nand.o
 obj-$(CONFIG_NAND_ZYNQ) += zynq_nand.o
 obj-$(CONFIG_NAND_STM32_FMC2) += stm32_fmc2_nand.o
+obj-$(CONFIG_NAND_S3C2440) += s3c2440_nand.o
 
 else  # minimal SPL drivers
 

@@ -610,6 +610,7 @@ static void nand_wait_status_ready(struct mtd_info *mtd, unsigned long timeo)
 static void nand_command(struct mtd_info *mtd, unsigned int command,
 			 int column, int page_addr)
 {
+//	debug("%s cmd = 0x%02x\n", __FUNCTION__, command);
 	register struct nand_chip *chip = mtd_to_nand(mtd);
 	int ctrl = NAND_CTRL_CLE | NAND_CTRL_CHANGE;
 
@@ -714,6 +715,7 @@ static void nand_command(struct mtd_info *mtd, unsigned int command,
 static void nand_command_lp(struct mtd_info *mtd, unsigned int command,
 			    int column, int page_addr)
 {
+//	debug("%s cmd = 0x%x\n", __FUNCTION__, command);
 	register struct nand_chip *chip = mtd_to_nand(mtd);
 
 	/* Emulate NAND_CMD_READOOB */
@@ -899,9 +901,12 @@ static int nand_wait(struct mtd_info *mtd, struct nand_chip *chip)
 	 */
 	ndelay(100);
 
-	ret = nand_status_op(chip, NULL);
+	ret = nand_status_op(chip, &status);
 	if (ret)
 		return ret;
+
+	if (!(status & 0x01)) 
+		return 0;
 
  	u32 timer = (CONFIG_SYS_HZ * timeo) / 1000;
  	u32 time_start;
@@ -927,6 +932,7 @@ static int nand_wait(struct mtd_info *mtd, struct nand_chip *chip)
 	if (ret)
 		return ret;
 
+	debug("%s status = %x\n", __func__, status);
 	/* This can happen if in case of timeout or buggy dev_ready */
 	WARN_ON(!(status & NAND_STATUS_READY));
 	return status;
@@ -1188,6 +1194,7 @@ EXPORT_SYMBOL_GPL(nand_change_read_column_op);
 int nand_read_oob_op(struct nand_chip *chip, unsigned int page,
 		     unsigned int offset_in_oob, void *buf, unsigned int len)
 {
+//	debug("%s \n", __FUNCTION__);
 	struct mtd_info *mtd = nand_to_mtd(chip);
 
 	if (len && !buf)
@@ -1221,6 +1228,7 @@ int nand_prog_page_begin_op(struct nand_chip *chip, unsigned int page,
 			    unsigned int offset_in_page, const void *buf,
 			    unsigned int len)
 {
+	debug("%s\n", __FUNCTION__);
 	struct mtd_info *mtd = nand_to_mtd(chip);
 
 	if (len && !buf)
@@ -1385,6 +1393,7 @@ int nand_status_op(struct nand_chip *chip, u8 *status)
 	if (status)
 		*status = chip->read_byte(mtd);
 
+	debug("%s status = %x\n", __func__, *status);
 	return 0;
 }
 EXPORT_SYMBOL_GPL(nand_status_op);
@@ -2304,6 +2313,7 @@ static int nand_setup_read_retry(struct mtd_info *mtd, int retry_mode)
 static int nand_do_read_ops(struct mtd_info *mtd, loff_t from,
 			    struct mtd_oob_ops *ops)
 {
+//	debug("%s \n", __FUNCTION__);
 	int chipnr, page, realpage, col, bytes, aligned, oob_required;
 	struct nand_chip *chip = mtd_to_nand(mtd);
 	int ret = 0;
@@ -2647,6 +2657,7 @@ static int nand_write_oob_syndrome(struct mtd_info *mtd,
 static int nand_do_read_oob(struct mtd_info *mtd, loff_t from,
 			    struct mtd_oob_ops *ops)
 {
+//	debug("%s \n", __FUNCTION__);
 	int page, realpage, chipnr;
 	struct nand_chip *chip = mtd_to_nand(mtd);
 	struct mtd_ecc_stats stats;
@@ -2792,6 +2803,7 @@ out:
 static int nand_write_page_raw(struct mtd_info *mtd, struct nand_chip *chip,
 			       const uint8_t *buf, int oob_required, int page)
 {
+	debug("%s\n", __FUNCTION__);
 	int ret;
 
 	ret = nand_write_data_op(chip, buf, mtd->writesize, false);
@@ -2910,6 +2922,7 @@ static int nand_write_page_hwecc(struct mtd_info *mtd, struct nand_chip *chip,
 				  const uint8_t *buf, int oob_required,
 				  int page)
 {
+	debug("%s\n", __FUNCTION__);
 	int i, eccsize = chip->ecc.size;
 	int eccbytes = chip->ecc.bytes;
 	int eccsteps = chip->ecc.steps;
@@ -3191,6 +3204,7 @@ static uint8_t *nand_fill_oob(struct mtd_info *mtd, uint8_t *oob, size_t len,
 static int nand_do_write_ops(struct mtd_info *mtd, loff_t to,
 			     struct mtd_oob_ops *ops)
 {
+	debug("nand_do_write_ops\n");
 	int chipnr, realpage, page, column;
 	struct nand_chip *chip = mtd_to_nand(mtd);
 	uint32_t writelen = ops->len;
@@ -3221,6 +3235,7 @@ static int nand_do_write_ops(struct mtd_info *mtd, loff_t to,
 
 	/* Check, if it is write protected */
 	if (nand_check_wp(mtd)) {
+		debug("nand_check_wp error\n");
 		ret = -EIO;
 		goto err_out;
 	}
@@ -3352,6 +3367,7 @@ static int panic_nand_write(struct mtd_info *mtd, loff_t to, size_t len,
 static int nand_do_write_oob(struct mtd_info *mtd, loff_t to,
 			     struct mtd_oob_ops *ops)
 {
+	debug("nand_do_write_oob\n");
 	int chipnr, page, status, len;
 	struct nand_chip *chip = mtd_to_nand(mtd);
 
@@ -3435,6 +3451,8 @@ static int nand_write_oob(struct mtd_info *mtd, loff_t to,
 			  struct mtd_oob_ops *ops)
 {
 	int ret = -ENOTSUPP;
+
+	debug("nand_write_oob\n");
 
 	ops->retlen = 0;
 
@@ -4419,7 +4437,8 @@ struct nand_flash_dev *nand_get_flash_type(struct mtd_info *mtd,
 	/* Read manufacturer and device IDs */
 	*maf_id = id_data[0];
 	*dev_id = id_data[1];
-
+	debug("Manufacturer ID: 0x%02x, Chip ID: 0x%02x\n",
+			*maf_id, *dev_id);
 	/*
 	 * Try again to make sure, as some systems the bus-hold or other
 	 * interface concerns can cause random data which looks like a
@@ -4468,6 +4487,7 @@ struct nand_flash_dev *nand_get_flash_type(struct mtd_info *mtd,
 		mtd->name = type->name;
 
 	chip->chipsize = (uint64_t)type->chipsize << 20;
+	debug("chipsize: 0x%llx\n", chip->chipsize);
 
 	if (!type->pagesize) {
 		/* Decode parameters from extended ID */
@@ -4561,7 +4581,7 @@ ident_done:
 		type->name);
 #endif
 
-	pr_info("%d MiB, %s, erase size: %d KiB, page size: %d, OOB size: %d\n",
+	debug("%d MiB, %s, erase size: %d KiB, page size: %d, OOB size: %d\n",
 		(int)(chip->chipsize >> 20), nand_is_slc(chip) ? "SLC" : "MLC",
 		mtd->erasesize >> 10, mtd->writesize, mtd->oobsize);
 	return type;

@@ -9,6 +9,7 @@ board_r.c:501:12:initr_enable_interrupts	8	static
 board_r.c:484:12:initr_jumptable	8	static
 board_r.c:454:12:initr_env	8	static
 board_r.c:424:12:initr_mmc	8	static
+board_r.c:404:12:initr_nand	8	static
 board_r.c:335:12:initr_announce	8	static
 board_r.c:180:12:initr_serial	8	static
 board_r.c:323:12:initr_bootstage	8	static
