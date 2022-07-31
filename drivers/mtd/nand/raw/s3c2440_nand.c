@@ -79,7 +79,7 @@ static int s3c24x0_dev_ready(struct mtd_info *mtd)
 void s3c24x0_nand_enable_hwecc(struct mtd_info *mtd, int mode)
 {
 	struct s3c24x0_nand *nand = s3c24x0_get_base_nand();
-	debug("s3c24x0_nand_enable_hwecc(%p, %d)\n", mtd, mode);
+//	debug("s3c24x0_nand_enable_hwecc(%p, %d)\n", mtd, mode);
 	writel(readl(&nand->nfcont) | S3C2440_NFCONF_INITECC, &nand->nfcont);
 	writel(readl(&nand->nfcont) & (~S3C2440_NFCONT_MAINECCLOCK), &nand->nfcont);
 }
@@ -88,19 +88,14 @@ static int s3c24x0_nand_calculate_ecc(struct mtd_info *mtd, const u_char *dat,
 				      u_char *ecc_code)
 {
 	struct s3c24x0_nand *nand = s3c24x0_get_base_nand();
-	// ecc_code[0] = readb(&nand->nfmecc0);
-	// ecc_code[1] = readb(&nand->nfmecc0 + 1);
-	// ecc_code[2] = readb(&nand->nfmecc0 + 2);
-	// ecc_code[3] = readb(&nand->nfmecc0 + 3);
 
 	ecc_code[0] = readl(&nand->nfmecc0) & 0xFF;
 	ecc_code[1] = (readl(&nand->nfmecc0) >> 8) & 0xFF;
 	ecc_code[2] = (readl(&nand->nfmecc0) >> 16) & 0xFF;
 	ecc_code[3] = (readl(&nand->nfmecc0) >> 24) & 0xFF;
 
-	debug("%x\n", readl(&nand->nfmecc0));
-	debug("s3c24x0_nand_calculate_hwecc(%p,): 0x%02x 0x%02x 0x%02x 0x%02x\n",
-	      mtd , ecc_code[0], ecc_code[1], ecc_code[2], ecc_code[3]);
+	// debug("s3c24x0_nand_calculate_hwecc(%p,): 0x%02x 0x%02x 0x%02x 0x%02x\n",
+	//       mtd , ecc_code[0], ecc_code[1], ecc_code[2], ecc_code[3]);
 
 	return 0;
 }
@@ -114,7 +109,7 @@ static int s3c24x0_nand_correct_data(struct mtd_info *mtd, u_char *dat,
 		read_ecc[3] == calc_ecc[3])
 		return 0;
 
-	printf("s3c24x0_nand_correct_data: failed\n");
+//	printf("s3c24x0_nand_correct_data: failed\n");
 	return -1;
 }
 #endif

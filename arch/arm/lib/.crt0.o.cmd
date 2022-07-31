@@ -5,13 +5,13 @@ source_arch/arm/lib/crt0.o := arch/arm/lib/crt0.S
 deps_arch/arm/lib/crt0.o := \
     $(wildcard include/config/spl/stack/r.h) \
     $(wildcard include/config/use/arch/memset.h) \
+    $(wildcard include/config/sys/init/sp/addr.h) \
     $(wildcard include/config/sys/text/base.h) \
     $(wildcard include/config/tpl/build.h) \
     $(wildcard include/config/tpl/needs/separate/stack.h) \
     $(wildcard include/config/tpl/stack.h) \
     $(wildcard include/config/spl/build.h) \
     $(wildcard include/config/spl/stack.h) \
-    $(wildcard include/config/sys/init/sp/addr.h) \
     $(wildcard include/config/spl/early/bss.h) \
     $(wildcard include/config/cpu/v7m.h) \
     $(wildcard include/config/framework.h) \
@@ -40,6 +40,14 @@ deps_arch/arm/lib/crt0.o := \
     $(wildcard include/config/sys/max/nand/device.h) \
     $(wildcard include/config/sys/nand/eccsize.h) \
     $(wildcard include/config/sys/nand/eccbytes.h) \
+    $(wildcard include/config/dm9000/base.h) \
+    $(wildcard include/config/ethaddr.h) \
+    $(wildcard include/config/ipaddr.h) \
+    $(wildcard include/config/serverip.h) \
+    $(wildcard include/config/netmask.h) \
+    $(wildcard include/config/bootcommand.h) \
+    $(wildcard include/config/bootargs.h) \
+    $(wildcard include/config/setup/memory/tags.h) \
   arch/arm/include/asm/config.h \
     $(wildcard include/config/h/.h) \
     $(wildcard include/config/lmb.h) \

@@ -932,7 +932,7 @@ static int nand_wait(struct mtd_info *mtd, struct nand_chip *chip)
 	if (ret)
 		return ret;
 
-	debug("%s status = %x\n", __func__, status);
+//	debug("%s status = %x\n", __func__, status);
 	/* This can happen if in case of timeout or buggy dev_ready */
 	WARN_ON(!(status & NAND_STATUS_READY));
 	return status;
@@ -1228,7 +1228,7 @@ int nand_prog_page_begin_op(struct nand_chip *chip, unsigned int page,
 			    unsigned int offset_in_page, const void *buf,
 			    unsigned int len)
 {
-	debug("%s\n", __FUNCTION__);
+	// debug("%s\n", __FUNCTION__);
 	struct mtd_info *mtd = nand_to_mtd(chip);
 
 	if (len && !buf)
@@ -1393,7 +1393,7 @@ int nand_status_op(struct nand_chip *chip, u8 *status)
 	if (status)
 		*status = chip->read_byte(mtd);
 
-	debug("%s status = %x\n", __func__, *status);
+//	debug("%s status = %x\n", __func__, *status);
 	return 0;
 }
 EXPORT_SYMBOL_GPL(nand_status_op);
@@ -2385,6 +2385,7 @@ read_retry:
 			else
 				ret = chip->ecc.read_page(mtd, chip, bufpoi,
 							  oob_required, page);
+			
 			if (ret < 0) {
 				if (use_bufpoi)
 					/* Invalidate page cache */
@@ -2440,6 +2441,7 @@ read_retry:
 				} else {
 					/* No more retry modes; real failure */
 					ecc_fail = true;
+					debug("ecc_fail!!\n");
 				}
 			}
 
@@ -2803,7 +2805,7 @@ out:
 static int nand_write_page_raw(struct mtd_info *mtd, struct nand_chip *chip,
 			       const uint8_t *buf, int oob_required, int page)
 {
-	debug("%s\n", __FUNCTION__);
+	// debug("%s\n", __FUNCTION__);
 	int ret;
 
 	ret = nand_write_data_op(chip, buf, mtd->writesize, false);
@@ -2922,7 +2924,7 @@ static int nand_write_page_hwecc(struct mtd_info *mtd, struct nand_chip *chip,
 				  const uint8_t *buf, int oob_required,
 				  int page)
 {
-	debug("%s\n", __FUNCTION__);
+	// debug("%s\n", __FUNCTION__);
 	int i, eccsize = chip->ecc.size;
 	int eccbytes = chip->ecc.bytes;
 	int eccsteps = chip->ecc.steps;
@@ -3204,7 +3206,7 @@ static uint8_t *nand_fill_oob(struct mtd_info *mtd, uint8_t *oob, size_t len,
 static int nand_do_write_ops(struct mtd_info *mtd, loff_t to,
 			     struct mtd_oob_ops *ops)
 {
-	debug("nand_do_write_ops\n");
+	// debug("nand_do_write_ops\n");
 	int chipnr, realpage, page, column;
 	struct nand_chip *chip = mtd_to_nand(mtd);
 	uint32_t writelen = ops->len;
@@ -3367,7 +3369,7 @@ static int panic_nand_write(struct mtd_info *mtd, loff_t to, size_t len,
 static int nand_do_write_oob(struct mtd_info *mtd, loff_t to,
 			     struct mtd_oob_ops *ops)
 {
-	debug("nand_do_write_oob\n");
+	// debug("nand_do_write_oob\n");
 	int chipnr, page, status, len;
 	struct nand_chip *chip = mtd_to_nand(mtd);
 
@@ -3452,7 +3454,7 @@ static int nand_write_oob(struct mtd_info *mtd, loff_t to,
 {
 	int ret = -ENOTSUPP;
 
-	debug("nand_write_oob\n");
+	// debug("nand_write_oob\n");
 
 	ops->retlen = 0;
 

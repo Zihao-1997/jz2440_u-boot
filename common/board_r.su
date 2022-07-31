@@ -22,4 +22,4 @@ board_r.c:66:12:board_flash_wp_on	0	static
 board_r.c:76:13:cpu_secondary_init_r	0	static
 board_r.c:80:12:initr_secondary_cpu	8	static
 board_r.c:124:12:fixup_cpu	0	static
-board_r.c:844:6:board_init_r	8	static
+board_r.c:845:6:board_init_r	8	static

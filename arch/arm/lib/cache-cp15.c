@@ -24,6 +24,16 @@ __weak void arm_init_domains(void)
 {
 }
 
+static void cp_delay(void)
+{
+	volatile int i; 
+
+	for (i = 0; i < 100; i++) 
+		nop(); 
+
+	asm volatile("" : : : "memory");
+}
+
 void set_section_dcache(int section, enum dcache_option option)
 {
 #ifdef CONFIG_ARMV7_LPAE
@@ -234,8 +244,9 @@ static void cache_disable(uint32_t cache_bit)
 
 	if (cache_bit == CR_C) {
 		/* if cache isn;t enabled no need to disable */
-		if ((reg & CR_C) != CR_C)
+		if ((reg & CR_C) != CR_C) { 
 			return;
+		}
 #ifdef CONFIG_SYS_ARM_MMU
 		/* if disabling data cache, disable mmu too */
 		cache_bit |= CR_M;
@@ -249,6 +260,7 @@ static void cache_disable(uint32_t cache_bit)
 	if (cache_bit == CR_C)
 #endif
 		flush_dcache_all();
+	
 	set_cr(reg & ~cache_bit);
 }
 #endif
@@ -272,11 +284,13 @@ int icache_status(void)
 void icache_enable(void)
 {
 	cache_enable(CR_I);
+	debug("~~icache_enable finish\n");
 }
 
 void icache_disable(void)
 {
 	cache_disable(CR_I);
+	debug("~~icache_disable finish\n");
 }
 
 int icache_status(void)
@@ -304,11 +318,13 @@ int dcache_status(void)
 void dcache_enable(void)
 {
 	cache_enable(CR_C);
+	debug("~~dcache_enable finish\n");
 }
 
 void dcache_disable(void)
 {
 	cache_disable(CR_C);
+	debug("~~dcache_disable finish\n");
 }
 
 int dcache_status(void)

@@ -20,6 +20,16 @@
 
 static void cache_flush(void);
 
+static void cp_delay(void)
+{
+	volatile int i; 
+
+	for (i = 0; i < 1000; i++) 
+		nop(); 
+
+	asm volatile("" : : : "memory");
+}
+
 int cleanup_before_linux (void)
 {
 	/*
@@ -30,7 +40,6 @@ int cleanup_before_linux (void)
 	 */
 
 	disable_interrupts();
-
 	/* turn off I/D-cache */
 	icache_disable();
 	dcache_disable();
@@ -44,6 +53,5 @@ int cleanup_before_linux (void)
 static void cache_flush (void)
 {
 	unsigned long i = 0;
-
 	asm ("mcr p15, 0, %0, c7, c7, 0": :"r" (i));
 }

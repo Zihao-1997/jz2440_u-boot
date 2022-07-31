@@ -622,6 +622,8 @@ int dm9000_initialize(bd_t *bis)
 {
 	struct eth_device *dev = &(dm9000_info.netdev);
 
+	debug("dm9000_initialize\n");
+
 	/* Load MAC address from EEPROM */
 	dm9000_get_enetaddr(dev);
 

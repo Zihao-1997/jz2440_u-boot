@@ -6,6 +6,7 @@ deps_board/samsung/jz2440/jz2440.o := \
     $(wildcard include/config/cmd/net.h) \
     $(wildcard include/config/cs8900.h) \
     $(wildcard include/config/cs8900/base.h) \
+    $(wildcard include/config/driver/dm9000.h) \
     $(wildcard include/config/sys/flash/cfi.h) \
   include/common.h \
     $(wildcard include/config/sys/support/64bit/data.h) \
@@ -46,6 +47,14 @@ deps_board/samsung/jz2440/jz2440.o := \
     $(wildcard include/config/sys/max/nand/device.h) \
     $(wildcard include/config/sys/nand/eccsize.h) \
     $(wildcard include/config/sys/nand/eccbytes.h) \
+    $(wildcard include/config/dm9000/base.h) \
+    $(wildcard include/config/ethaddr.h) \
+    $(wildcard include/config/ipaddr.h) \
+    $(wildcard include/config/serverip.h) \
+    $(wildcard include/config/netmask.h) \
+    $(wildcard include/config/bootcommand.h) \
+    $(wildcard include/config/bootargs.h) \
+    $(wildcard include/config/setup/memory/tags.h) \
   arch/arm/include/asm/config.h \
     $(wildcard include/config/h/.h) \
     $(wildcard include/config/lmb.h) \

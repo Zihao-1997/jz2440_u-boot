@@ -98,13 +98,13 @@ int board_early_init_f(void)
 int board_init(void)
 {
 	/* arch number of SMDK2410-Board */
-	gd->bd->bi_arch_number = MACH_TYPE_SMDK2410;
+	gd->bd->bi_arch_number = MACH_TYPE_S3C2440;
 
 	/* adress of boot parameters */
 	gd->bd->bi_boot_params = 0x30000100;
 
 	icache_enable();
-	dcache_enable();
+//	dcache_enable();
 
 	return 0;
 }
@@ -123,6 +123,10 @@ int board_eth_init(bd_t *bis)
 #ifdef CONFIG_CS8900
 	rc = cs8900_initialize(0, CONFIG_CS8900_BASE);
 #endif
+
+#ifdef CONFIG_DRIVER_DM9000
+	rc = dm9000_initialize(bis);
+#endif 
 	return rc;
 }
 #endif

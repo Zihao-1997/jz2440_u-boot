@@ -35,6 +35,4 @@ image.c:964:7:genimg_get_kernel_addr	16	static
 image.c:987:5:genimg_get_format	0	static
 image.c:1019:5:genimg_has_config	0	static
 image.c:1050:5:boot_get_ramdisk	40	static
-image.c:1259:5:boot_ramdisk_high	32	static
 image.c:1334:5:boot_get_setup	0	static
-image.c:1606:5:image_setup_linux	0	static

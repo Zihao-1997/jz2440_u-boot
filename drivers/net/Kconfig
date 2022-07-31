@@ -618,3 +618,7 @@ config MVMDIO
 	  This driver is used by the MVPP2 and MVNETA drivers.
 
 endif # NETDEVICES
+
+config DRIVER_DM9000
+	bool "This driver supports the BCM6348 Ethernet MAC"
+	

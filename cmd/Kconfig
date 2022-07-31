@@ -2145,3 +2145,8 @@ config CMD_UBIFS
 	  UBIFS is a file system for flash devices which works on top of UBI.
 
 endmenu
+
+config CMD_UPGRADE
+	bool "upgrade"
+	help
+		Upgrade command support.

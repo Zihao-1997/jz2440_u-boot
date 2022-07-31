@@ -228,7 +228,7 @@ static int _do_env_set(int flag, int argc, char * const argv[], int env_flag)
 	char  *name, *value, *s;
 	struct env_entry e, *ep;
 
-	debug("Initial value for argc=%d\n", argc);
+//	debug("Initial value for argc=%d\n", argc);
 
 #if CONFIG_IS_ENABLED(CMD_NVEDIT_EFI)
 	if (argc > 1 && argv[1][0] == '-' && argv[1][1] == 'e')
@@ -249,7 +249,7 @@ static int _do_env_set(int flag, int argc, char * const argv[], int env_flag)
 			}
 		}
 	}
-	debug("Final value for argc=%d\n", argc);
+//	debug("Final value for argc=%d\n", argc);
 	name = argv[1];
 
 	if (strchr(name, '=')) {
@@ -662,6 +662,7 @@ static int do_env_edit(cmd_tbl_t *cmdtp, int flag, int argc,
  */
 char *env_get(const char *name)
 {
+//	debug("env_get %s\n", name);
 	if (gd->flags & GD_FLG_ENV_READY) { /* after import into hashtable */
 		struct env_entry e, *ep;
 
@@ -851,7 +852,7 @@ static int do_env_delete(cmd_tbl_t *cmdtp, int flag,
 	int env_flag = H_INTERACTIVE;
 	int ret = 0;
 
-	debug("Initial value for argc=%d\n", argc);
+//	debug("Initial value for argc=%d\n", argc);
 	while (argc > 1 && **(argv + 1) == '-') {
 		char *arg = *++argv;
 
@@ -866,7 +867,7 @@ static int do_env_delete(cmd_tbl_t *cmdtp, int flag,
 			}
 		}
 	}
-	debug("Final value for argc=%d\n", argc);
+//	debug("Final value for argc=%d\n", argc);
 
 	env_id++;
 

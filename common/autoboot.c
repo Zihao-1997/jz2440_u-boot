@@ -225,6 +225,7 @@ static int abortboot_key_sequence(int bootdelay)
 	int abort;
 	uint64_t etime = endtick(bootdelay);
 
+	debug("%s\n", __func__);
 #  ifdef CONFIG_AUTOBOOT_PROMPT
 	/*
 	 * CONFIG_AUTOBOOT_PROMPT includes the %d for all boards.
@@ -248,7 +249,7 @@ static int abortboot_single_key(int bootdelay)
 	int abort = 0;
 	unsigned long ts;
 
-	printf("Hit any key to stop autoboot: %2d ", bootdelay);
+	debug("Hit any key to stop autoboot: %2d ", bootdelay);
 
 	/*
 	 * Check if key already pressed

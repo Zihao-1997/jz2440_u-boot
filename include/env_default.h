@@ -28,7 +28,7 @@ const uchar default_environment[] = {
 #ifdef	CONFIG_ENV_FLAGS_LIST_DEFAULT
 	ENV_FLAGS_VAR "=" CONFIG_ENV_FLAGS_LIST_DEFAULT "\0"
 #endif
-#ifdef	CONFIG_USE_BOOTARGS
+#ifdef	CONFIG_BOOTARGS
 	"bootargs="	CONFIG_BOOTARGS			"\0"
 #endif
 #ifdef	CONFIG_BOOTCOMMAND
@@ -52,6 +52,9 @@ const uchar default_environment[] = {
 #ifdef	CONFIG_ETHPRIME
 	"ethprime="	CONFIG_ETHPRIME			"\0"
 #endif
+#ifdef  CONFIG_ETHADDR 
+	"ethaddr=" __stringify(CONFIG_ETHADDR)	"\0"
+#endif 
 #ifdef	CONFIG_IPADDR
 	"ipaddr="	__stringify(CONFIG_IPADDR)	"\0"
 #endif

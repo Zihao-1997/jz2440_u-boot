@@ -89,6 +89,9 @@ clbss_l:cmp	r0, r1			/* while not at end of BSS */
  */
 
 ENTRY(_main)
+	ldr	sp, =(CONFIG_SYS_INIT_SP_ADDR)
+	bic	sp, sp, #7	/* 8-byte alignment for ABI compliance */
+
 	bl nand_init_rel
 
 	mov r0, #0 
@@ -97,6 +100,7 @@ ENTRY(_main)
 	ldr r3, =__bss_start 
 	sub r2, r3, r2 
 	bl 	nand_relocate
+/*	bl 	clear_bss */
 
 	ldr pc, =call_board_init_f
 
@@ -105,6 +109,7 @@ call_board_init_f:
  * Set up initial C runtime environment and call board_init_f(0).
  */
 
+#if 0
 #if defined(CONFIG_TPL_BUILD) && defined(CONFIG_TPL_NEEDS_SEPARATE_STACK)
 	ldr	r0, =(CONFIG_TPL_STACK)
 #elif defined(CONFIG_SPL_BUILD) && defined(CONFIG_SPL_STACK)
@@ -112,8 +117,9 @@ call_board_init_f:
 #else
 	ldr	r0, =(CONFIG_SYS_INIT_SP_ADDR)
 #endif
-	bic	r0, r0, #7	/* 8-byte alignment for ABI compliance */
-	mov	sp, r0
+#endif
+
+	mov	r0, sp
 	bl	board_init_f_alloc_reserve
 	mov	sp, r0
 	/* set up gd here, outside any C code */

@@ -11,6 +11,15 @@
 
 #define PAGE_SIZE   2048
 
+void clear_bss(void)
+{
+    extern int __bss_start, __bss_end;
+    int *p = &__bss_start;
+
+    for (; p < &__bss_end; p++)
+        *p = 0;
+}
+
 void nand_init_rel(void)
 {
     NFCONF = (TACLS << 12) | (TWRPH0 << 8) | (TWRPH1 << 4);
@@ -101,7 +110,6 @@ void nand_read(unsigned int addr, unsigned char *buf, unsigned int size)
     int i = 0; 
     unsigned int col = addr % PAGE_SIZE; 
 
-
     nand_chip_select(1); 
     while (i < size) {
         // if (!(addr & 0x1FFFF) && nand_is_bad(addr)) {
@@ -113,7 +121,6 @@ void nand_read(unsigned int addr, unsigned char *buf, unsigned int size)
         nand_addr(addr); 
         nand_cmd(0x30); 
         nand_wait_ready(); 
-
         for (; (col < PAGE_SIZE) & (i < size); i++, col++) {
             buf[i] = nand_data(); 
             addr++; 
@@ -126,5 +133,5 @@ void nand_read(unsigned int addr, unsigned char *buf, unsigned int size)
 
 void nand_relocate(unsigned char *src, unsigned char *des, unsigned int size)
 {
-    nand_read((unsigned int)src, des, size); 
+    nand_read((unsigned int)src, des, size);
 }

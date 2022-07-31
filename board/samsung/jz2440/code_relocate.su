@@ -1,4 +1,5 @@
-code_relocate.c:35:13:nand_cmd	8	static
-code_relocate.c:14:6:nand_init_rel	0	static
-code_relocate.c:99:6:nand_read	32	static
-code_relocate.c:127:6:nand_relocate	0	static
+code_relocate.c:44:13:nand_cmd	8	static
+code_relocate.c:14:6:clear_bss	0	static
+code_relocate.c:23:6:nand_init_rel	0	static
+code_relocate.c:108:6:nand_read	32	static
+code_relocate.c:134:6:nand_relocate	0	static

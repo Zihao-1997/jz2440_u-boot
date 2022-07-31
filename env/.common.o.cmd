@@ -46,6 +46,14 @@ deps_env/common.o := \
     $(wildcard include/config/sys/max/nand/device.h) \
     $(wildcard include/config/sys/nand/eccsize.h) \
     $(wildcard include/config/sys/nand/eccbytes.h) \
+    $(wildcard include/config/dm9000/base.h) \
+    $(wildcard include/config/ethaddr.h) \
+    $(wildcard include/config/ipaddr.h) \
+    $(wildcard include/config/serverip.h) \
+    $(wildcard include/config/netmask.h) \
+    $(wildcard include/config/bootcommand.h) \
+    $(wildcard include/config/bootargs.h) \
+    $(wildcard include/config/setup/memory/tags.h) \
   arch/arm/include/asm/config.h \
     $(wildcard include/config/h/.h) \
     $(wildcard include/config/lmb.h) \
@@ -356,22 +364,16 @@ deps_env/common.o := \
     $(wildcard include/config/use/default/env/file.h) \
     $(wildcard include/config/env/callback/list/default.h) \
     $(wildcard include/config/env/flags/list/default.h) \
-    $(wildcard include/config/use/bootargs.h) \
-    $(wildcard include/config/bootargs.h) \
-    $(wildcard include/config/bootcommand.h) \
     $(wildcard include/config/rambootcommand.h) \
     $(wildcard include/config/nfsbootcommand.h) \
     $(wildcard include/config/bootdelay.h) \
     $(wildcard include/config/baudrate.h) \
     $(wildcard include/config/loads/echo.h) \
     $(wildcard include/config/ethprime.h) \
-    $(wildcard include/config/ipaddr.h) \
-    $(wildcard include/config/serverip.h) \
     $(wildcard include/config/sys/autoload.h) \
     $(wildcard include/config/preboot.h) \
     $(wildcard include/config/rootpath.h) \
     $(wildcard include/config/gatewayip.h) \
-    $(wildcard include/config/netmask.h) \
     $(wildcard include/config/hostname.h) \
     $(wildcard include/config/bootfile.h) \
     $(wildcard include/config/loadaddr.h) \

@@ -47,6 +47,14 @@ deps_common/cli_simple.o := \
     $(wildcard include/config/sys/max/nand/device.h) \
     $(wildcard include/config/sys/nand/eccsize.h) \
     $(wildcard include/config/sys/nand/eccbytes.h) \
+    $(wildcard include/config/dm9000/base.h) \
+    $(wildcard include/config/ethaddr.h) \
+    $(wildcard include/config/ipaddr.h) \
+    $(wildcard include/config/serverip.h) \
+    $(wildcard include/config/netmask.h) \
+    $(wildcard include/config/bootcommand.h) \
+    $(wildcard include/config/bootargs.h) \
+    $(wildcard include/config/setup/memory/tags.h) \
   arch/arm/include/asm/config.h \
     $(wildcard include/config/h/.h) \
     $(wildcard include/config/lmb.h) \

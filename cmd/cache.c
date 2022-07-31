@@ -50,7 +50,7 @@ static int do_icache(cmd_tbl_t *cmdtp, int flag, int argc, char * const argv[])
 
 void __weak flush_dcache_all(void)
 {
-	puts("No arch specific flush_dcache_all available!\n");
+	debug("No arch specific flush_dcache_all available!\n");
 	/* please define arch specific flush_dcache_all */
 }
 

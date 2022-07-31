@@ -15,11 +15,12 @@ fs.c:331:13:fs_get_type_name	0	static
 fs.c:336:5:fs_set_blk_dev	24	static
 fs.c:381:5:fs_set_blk_dev_with_part	16	static
 fs.c:405:6:fs_close	8	static
+fs.c:495:12:_fs_read.isra.2	40	static
 fs.c:414:5:fs_uuid	0	static
 fs.c:421:5:fs_ls	8	static
 fs.c:434:5:fs_exists	8	static
 fs.c:447:5:fs_size	8	static
-fs.c:526:5:fs_read	40	static
+fs.c:526:5:fs_read	0	static
 fs.c:532:5:fs_write	40	static
 fs.c:552:23:fs_opendir	24	static
 fs.c:571:19:fs_readdir	16	static
@@ -28,7 +29,7 @@ fs.c:604:5:fs_unlink	8	static
 fs.c:617:5:fs_mkdir	8	static
 fs.c:630:5:fs_ln	16	static
 fs.c:646:5:do_size	24	static
-fs.c:665:5:do_load	248	static
+fs.c:665:5:do_load	72	static
 fs.c:739:5:do_ls	16	static
 fs.c:756:5:file_exists	8	static
 fs.c:765:5:do_save	64	static
